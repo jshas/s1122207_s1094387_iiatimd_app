@@ -1,0 +1,2 @@
+rootProject.name = "s1122207_s1094387_iiatimd_app"
+include ':app'
