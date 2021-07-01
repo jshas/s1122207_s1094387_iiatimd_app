@@ -3,33 +3,29 @@ package com.example.s1122207_s1094387_iiatimd_app;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import java.text.DecimalFormat;
 
 @Entity
 public class Medicine {
-
 
     @PrimaryKey
     private int uuid;
     @ColumnInfo
     private String name;
     @ColumnInfo
-    private float amount;
+    private double amount;
     @ColumnInfo
     private String unit;
     @ColumnInfo
     private int dailyAmount;
 
-
-    public Medicine(int uuid, String name, float amount, String unit, int dailyAmount) {
+    public Medicine(int uuid, String name, double amount, String unit, int dailyAmount) {
         this.uuid = uuid;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
         this.dailyAmount = dailyAmount;
     }
-
-
-
 
     public int getUuid() {
         return uuid;
@@ -47,12 +43,13 @@ public class Medicine {
         this.name = name;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
-        this.amount = amount;
+    public void setAmount(double amount) {
+        DecimalFormat formatter = new DecimalFormat("0.00");
+        this.amount = Double.parseDouble(formatter.format(amount));
     }
 
     public String getUnit() { return unit; }
