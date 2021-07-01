@@ -1,23 +1,31 @@
 package com.example.s1122207_s1094387_iiatimd_app;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+
+@Entity
 public class User {
-    private int uuid;
+    @PrimaryKey
+    private int id;
+    @ColumnInfo
     private String name;
+    @ColumnInfo
     private String email;
-    private Medicine[] medicines;
 
-    public User(int uuid, String name, String email) {
-        this.uuid = uuid;
+
+    public User(int id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public int getUuid() {
-        return uuid;
+    public int getId() {
+        return id;
     }
 
-    public void setUuid(int uuid) {
-        this.uuid = uuid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,14 +42,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    // User has-a medicines
-    public Medicine[] getMedicines() {
-        return medicines;
-    }
-
-    public void setMedicines(Medicine[] medicines) {
-        this.medicines = medicines;
     }
 }
