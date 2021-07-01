@@ -4,5 +4,6 @@
     <!-- %1$s is used for string variables-->
     <string name="welcome_text">Welcome %1$s</string>
     <string name="medicine_placeholder">Red Elixer</string>
+    <string name="medicine_amount">Dose: %1$s %2$s</string>
 
 </resources>
