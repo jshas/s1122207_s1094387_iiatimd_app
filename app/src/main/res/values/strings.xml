@@ -2,4 +2,5 @@
     <string name="app_name">s1122207_s1094387_iiatimd_app</string>
     <string name="welkcome_text">Hey maat, pak pil.</string>
     <string name="toHistoryOverview">Login</string>
+    <string name="toCreateUser">Create account</string>
 </resources>

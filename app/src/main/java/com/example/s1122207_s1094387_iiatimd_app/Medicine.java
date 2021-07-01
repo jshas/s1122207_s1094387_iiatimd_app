@@ -12,7 +12,7 @@ public class Medicine {
         this.amount = amount;
         this.unit = unit;
     }
-
+    //Sommige getters en setters kunnen verwijderd worden
     public int getUuid() {
         return uuid;
     }
