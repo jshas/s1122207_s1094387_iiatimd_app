@@ -13,10 +13,10 @@ public interface MedicineDao {
     @Query("SELECT * FROM medicine")
     List<Medicine> getAll();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAllMedicines(Medicine... medicine);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMedicine(Medicine medicine);
 
     @Delete
