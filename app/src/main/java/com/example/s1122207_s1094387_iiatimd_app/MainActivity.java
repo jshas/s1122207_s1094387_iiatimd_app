@@ -29,9 +29,12 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: MEDICINE ARRAY
         //  1) Replace hardcoded array with an API fetch
-        Medicine[] medicines = new Medicine[2];
-        medicines[0] = new Medicine(1, "Ibuprofen", 1000, "mg", 1);
-        medicines[1] = new Medicine(1, "Ritalin", 2.5f , "mg", 4);
+        Medicine[] medicines = new Medicine[5];
+        medicines[0] = new Medicine(1, "Ibuprofen", 1000f, "mg", 1);
+        medicines[1] = new Medicine(2, "Ritalin", 2.5f , "mg", 4);
+        medicines[2] = new Medicine(3, "Dexamfetamine", 2.5f , "mg", 4);
+        medicines[3] = new Medicine(4, "Paracetamol", 2.5f , "mg", 4);
+        medicines[4] = new Medicine(5, "Hoestdrank", 2.5f , "mg", 4);
 
 
         User person = new User(1, "Sjon Haan", "sjonnie@testkip.nl");
