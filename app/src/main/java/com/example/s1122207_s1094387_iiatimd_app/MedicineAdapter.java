@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder> {
+public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHolder> {
     private final Medicine[] medicines;
 
     public MedicineAdapter(Medicine[] medicines){
@@ -17,14 +17,19 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
     }
     @NonNull
     @Override
-    public MedicineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_card, parent, false);
-        return new MedicineViewHolder(v);
+        return new viewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MedicineViewHolder holder, int position) {
-        holder.textView.setText(medicines[position].getName());
+    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+        holder.nameTextView.setText(medicines[position].getName());
+
+        String amountText;
+        // Dose: with formatted float and string
+        amountText = holder.itemView.getContext().getString(R.string.medicine_amount, String.valueOf(medicines[position].getAmount()), medicines[position].getUnit() );
+        holder.doseTextView.setText(amountText);
     }
 
     @Override
@@ -32,11 +37,12 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.Medici
         return medicines.length;
     }
 
-    public static class MedicineViewHolder extends RecyclerView.ViewHolder{
-        public TextView textView;
-        public MedicineViewHolder(View v){
+    public static class viewHolder extends RecyclerView.ViewHolder{
+        public TextView nameTextView, doseTextView;
+        public viewHolder(View v){
             super(v);
-            textView = v.findViewById(R.id.medicineTextView);
+            nameTextView = v.findViewById(R.id.medicineTextView);
+            doseTextView = v.findViewById(R.id.medicineTextView2);
         }
     }
 
