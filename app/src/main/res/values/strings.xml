@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">s1122207_s1094387_iiatimd_app</string>
-    <string name="welkcome_text">Hey maat, pak pil.</string>
-    <string name="toHistoryOverview">Login</string>
-    <string name="toCreateUser">Create account</string>
+
+    <!-- %1$s is used for string variables-->
+    <string name="welcome_text">Welcome %1$s</string>
+    <string name="medicine_placeholder">Red Elixer</string>
+    <string name="medicine_amount">Dose: %1$s %2$s</string>
+
 </resources>
