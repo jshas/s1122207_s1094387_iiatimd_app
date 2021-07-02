@@ -26,7 +26,7 @@ public class Medicine {
         this.unit = unit;
         this.dailyAmount = dailyAmount;
     }
-
+    //Sommige getters en setters kunnen verwijderd worden
     public int getUuid() {
         return uuid;
     }
