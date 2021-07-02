@@ -31,11 +31,6 @@ public class OverviewMain extends AppCompatActivity {
         //Hier de array met data
         Medicine[] ritalin = new Medicine[5];
 
-        //Test data, verwijderen
-        for(int i = 0; i < 5; i++){
-            ritalin[i] = new Medicine(1, "Ritalin", 3.5f, "Pil");
-        }
-
         recyclerViewAdapter = new HistoryAdapter(ritalin);
         recyclerView.setAdapter(recyclerViewAdapter);
     }

@@ -3,6 +3,7 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/medicineCardView"
     android:layout_width="300dp"
     android:layout_height="200dp"
@@ -58,10 +59,8 @@
             android:theme="@style/pill_taken_checkbox"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.514"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/medicineTextView2"
-            app:layout_constraintVertical_bias="0.424" />
+            app:layout_constraintTop_toBottomOf="@+id/medicineTextView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
