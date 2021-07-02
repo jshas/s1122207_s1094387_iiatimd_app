@@ -48,8 +48,7 @@ public class Medicine {
     }
 
     public void setAmount(double amount) {
-        DecimalFormat formatter = new DecimalFormat("0.00");
-        this.amount = Double.parseDouble(formatter.format(amount));
+        this.amount = amount;
     }
 
     public String getUnit() { return unit; }

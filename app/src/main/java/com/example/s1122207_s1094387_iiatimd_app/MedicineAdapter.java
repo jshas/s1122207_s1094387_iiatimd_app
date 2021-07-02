@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
+
 public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHolder> {
     private final Medicine[] medicines;
 
@@ -25,10 +27,11 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHo
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         holder.nameTextView.setText(medicines[position].getName());
-
         String amountText;
         // Dose: with formatted float and string
-        amountText = holder.itemView.getContext().getString(R.string.medicine_amount, String.valueOf(medicines[position].getAmount()), medicines[position].getUnit() );
+        DecimalFormat formatter = new DecimalFormat("0.00");
+        double formattedAmount = Double.parseDouble(formatter.format(medicines[position].getAmount()));
+        amountText = holder.itemView.getContext().getString(R.string.medicine_amount, String.valueOf(formattedAmount), medicines[position].getUnit() );
         holder.doseTextView.setText(amountText);
     }
 
