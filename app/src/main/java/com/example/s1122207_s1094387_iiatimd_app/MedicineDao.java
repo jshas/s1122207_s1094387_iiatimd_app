@@ -5,13 +5,19 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import java.util.List;
 
 @Dao
 public interface MedicineDao {
+
     @Query("SELECT * FROM medicine")
     List<Medicine> getAll();
+
+    @Transaction
+    @Query("SELECT * FROM medicine")
+    List<MedicineAndPrescription> getMedicinesWithPrescription();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAllMedicines(Medicine... medicine);
@@ -21,4 +27,5 @@ public interface MedicineDao {
 
     @Delete
     void delete(Medicine medicine);
+
 }

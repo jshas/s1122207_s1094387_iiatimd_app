@@ -5,21 +5,21 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
-
-//FIXME: Remove  @Insert(onConflict) in production.
 
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user")
     List<User> getAll();
 
-    @Query("SELECT * FROM User where id LIKE :id")
+    @Query("SELECT * FROM User where userId like :id")
     User getById(int id);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Query("SELECT name FROM User where userId like :id")
+    String getUserNameById(int id);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(User... users);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

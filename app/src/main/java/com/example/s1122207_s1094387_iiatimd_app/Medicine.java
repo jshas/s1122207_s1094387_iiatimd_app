@@ -3,36 +3,32 @@ package com.example.s1122207_s1094387_iiatimd_app;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import java.text.DecimalFormat;
 
 @Entity
 public class Medicine {
-
     @PrimaryKey
-    private int uuid;
+    private int medicineId;
     @ColumnInfo
     private String name;
     @ColumnInfo
     private double amount;
     @ColumnInfo
     private String unit;
-    @ColumnInfo
-    private int dailyAmount;
 
-    public Medicine(int uuid, String name, double amount, String unit, int dailyAmount) {
-        this.uuid = uuid;
+    public Medicine(int medicineId, String name, double amount, String unit) {
+        this.medicineId = medicineId;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
-        this.dailyAmount = dailyAmount;
+
     }
     //Sommige getters en setters kunnen verwijderd worden
-    public int getUuid() {
-        return uuid;
-    }
+    public int getMedicineId() {
+            return medicineId;
+        }
 
-    public void setUuid(int uuid) {
-        this.uuid = uuid;
+    public void setMedicineId(int medicineId) {
+        this.medicineId = medicineId;
     }
 
     public String getName() {
@@ -57,11 +53,5 @@ public class Medicine {
         this.unit = unit;
     }
 
-    public int getDailyAmount() {
-        return dailyAmount;
-    }
 
-    public void setDailyAmount(int dailyAmount) {
-        this.dailyAmount = dailyAmount;
-    }
 }

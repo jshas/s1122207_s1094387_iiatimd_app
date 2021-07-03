@@ -1,4 +1,5 @@
 package com.example.s1122207_s1094387_iiatimd_app;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -7,25 +8,24 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
     @PrimaryKey
-    private int id;
+    private int userId;
     @ColumnInfo
     private String name;
     @ColumnInfo
     private String email;
 
-
-    public User(int id, String name, String email) {
-        this.id = id;
+    public User(int userId, String name, String email) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {

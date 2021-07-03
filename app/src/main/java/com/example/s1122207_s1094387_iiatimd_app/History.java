@@ -3,32 +3,36 @@ package com.example.s1122207_s1094387_iiatimd_app;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(
+    foreignKeys = {
+        @ForeignKey(entity = Medicine.class, parentColumns = "medicineId", childColumns =  "medicineId")
+    }
+)
 public class History {
     @PrimaryKey
-    private int id;
-    private int userId;
-    private int medicineId;
+    private int historyId;
+    @ColumnInfo(index = true)
+    private int medicineId ;
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    private String createdAt; // SQLite does not store datetime objects but Strings
+    private String createdAt; // SQLite stores timestamp Stamps instead of datetime objects
 
-    public int getId() {
-        return id;
+    public History(int historyId, int medicineId, String createdAt) {
+        this.historyId = historyId;
+        this.medicineId = medicineId;
+        this.createdAt = createdAt;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getHistoryId() {
+        return historyId;
     }
 
-    public int getUserId() {
-        return userId;
+    public void setHistoryId(int historyId) {
+        this.historyId = historyId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public int getMedicineId() {
         return medicineId;
