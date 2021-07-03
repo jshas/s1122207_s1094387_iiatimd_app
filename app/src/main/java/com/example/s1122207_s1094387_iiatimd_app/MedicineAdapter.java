@@ -18,6 +18,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHo
         this.medicines = medicines;
     }
 
+
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,7 +27,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MedicineAdapter.viewHolder holder, int position) {
         holder.nameTextView.setText(medicines.get(position).getName());
         String amountText;
         // Dose: with formatted float and string
@@ -41,6 +42,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHo
         super.onDetachedFromRecyclerView(recyclerView);
 
     }
+
+
+
 
     @Override
     public int getItemCount() {

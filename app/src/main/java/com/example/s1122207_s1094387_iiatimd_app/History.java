@@ -13,32 +13,34 @@ import androidx.room.PrimaryKey;
 )
 public class History {
     @PrimaryKey
-    private int historyId;
+    private long historyId;
     @ColumnInfo(index = true)
-    private int medicineId ;
+    private long medicineId;
+    private double takenDoses;
+    private double totalDoses;
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
     private String createdAt; // SQLite stores timestamp Stamps instead of datetime objects
 
-    public History(int historyId, int medicineId, String createdAt) {
+    public History(long historyId, long medicineId, String createdAt) {
         this.historyId = historyId;
         this.medicineId = medicineId;
         this.createdAt = createdAt;
     }
 
-    public int getHistoryId() {
+    public long getHistoryId() {
         return historyId;
     }
 
-    public void setHistoryId(int historyId) {
+    public void setHistoryId(long historyId) {
         this.historyId = historyId;
     }
 
 
-    public int getMedicineId() {
+    public long getMedicineId() {
         return medicineId;
     }
 
-    public void setMedicineId(int medicineId) {
+    public void setMedicineId(long medicineId) {
         this.medicineId = medicineId;
     }
 

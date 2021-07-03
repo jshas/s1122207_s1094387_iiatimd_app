@@ -8,23 +8,23 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
     @PrimaryKey
-    private int userId;
+    private long userId;
     @ColumnInfo
     private String name;
     @ColumnInfo
     private String email;
 
-    public User(int userId, String name, String email) {
+    public User(long userId, String name, String email) {
         this.userId = userId;
         this.name = name;
         this.email = email;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

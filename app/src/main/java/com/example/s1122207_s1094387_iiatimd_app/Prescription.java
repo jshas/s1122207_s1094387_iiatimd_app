@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Prescription {
     @PrimaryKey
-    private int prescriptionId;
-    private int medicineId;
+    private long prescriptionId;
+    private long medicineId;
     private float singleDose; // How many
-    private int frequency; // How many doses / per day
-    private int interval; // How many hours/minutes between doses
+    private long frequency; // How many doses / per day
+    private long interval; // How many hours/minutes between doses
 
-    public Prescription(int prescriptionId, int medicineId, float singleDose, int frequency, int interval ) {
+    public Prescription(long prescriptionId, long medicineId, float singleDose, long frequency, long interval ) {
         this.prescriptionId = prescriptionId;
         this.medicineId = medicineId;
         this.singleDose = singleDose;
@@ -21,19 +21,19 @@ public class Prescription {
         this.interval = interval; // in minutes
     }
 
-    public int getPrescriptionId() {
+    public long getPrescriptionId() {
         return prescriptionId;
     }
 
-    public void setPrescriptionId(int prescriptionId) {
+    public void setPrescriptionId(long prescriptionId) {
         this.prescriptionId = prescriptionId;
     }
 
-    public int getMedicineId() {
+    public long getMedicineId() {
         return medicineId;
     }
 
-    public void setMedicineId(int medicineId) {
+    public void setMedicineId(long medicineId) {
         this.medicineId = medicineId;
     }
 
@@ -45,19 +45,19 @@ public class Prescription {
         this.singleDose = singleDose;
     }
 
-    public int getInterval() {
+    public long getInterval() {
         return interval;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(long interval) {
         this.interval = interval;
     }
 
-    public int getFrequency() {
+    public long getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(int frequency) {
+    public void setFrequency(long frequency) {
         this.frequency = frequency;
     }
 }

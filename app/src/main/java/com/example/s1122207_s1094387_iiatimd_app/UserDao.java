@@ -14,10 +14,10 @@ public interface UserDao {
     List<User> getAll();
 
     @Query("SELECT * FROM User where userId like :id")
-    User getById(int id);
+    User getById(long id);
 
     @Query("SELECT name FROM User where userId like :id")
-    String getUserNameById(int id);
+    String getUserNameById(long id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(User... users);

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Medicine {
     @PrimaryKey
-    private int medicineId;
+    private long medicineId;
     @ColumnInfo
     private String name;
     @ColumnInfo
@@ -15,7 +15,7 @@ public class Medicine {
     @ColumnInfo
     private String unit;
 
-    public Medicine(int medicineId, String name, double amount, String unit) {
+    public Medicine(long medicineId, String name, double amount, String unit) {
         this.medicineId = medicineId;
         this.name = name;
         this.amount = amount;
@@ -23,11 +23,11 @@ public class Medicine {
 
     }
     //Sommige getters en setters kunnen verwijderd worden
-    public int getMedicineId() {
+    public long getMedicineId() {
             return medicineId;
         }
 
-    public void setMedicineId(int medicineId) {
+    public void setMedicineId(long medicineId) {
         this.medicineId = medicineId;
     }
 
