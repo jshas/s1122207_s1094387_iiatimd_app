@@ -10,19 +10,20 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
     public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
-        private Medicine[] ritalin;
+        private History[] timeline;
 
         //Wijs gegevens aan bij de adapter
-        public HistoryAdapter(Medicine[] ritalin){
-            this.ritalin = ritalin;
+        public HistoryAdapter(Medicine[] timeline){
+            this.timeline = timeline;
         }
 
         public static class HistoryViewHolder extends RecyclerView.ViewHolder{
             public TextView textView;
 
+            //Replace textView with a whole card
             public HistoryViewHolder(View v){
                 super(v);
-                textView = v.findViewById(R.id.textView);
+                textView = v.findViewById(R.id.dateTextView);
             }
         }
         @NonNull
@@ -35,12 +36,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
         @Override
         public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-            holder.textView.setText(ritalin[position].getName()); //tekst op positie = positie in pillen[]
+            holder.textView.setText(timeline[position].getName()); //tekst op positie = positie in pillen[]
         }
 
         @Override
         public int getItemCount() { //Moet weten hoe groot array is
-            return ritalin.length;
+            return timeline.length;
         }
 
 }
+
