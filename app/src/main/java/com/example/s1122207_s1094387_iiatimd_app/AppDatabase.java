@@ -9,12 +9,13 @@ import androidx.room.RoomDatabase;
 @Database(entities = {
         User.class,
         Medicine.class,
-        MedicineAndUsers.class,
-},
-        version = 5)
+        History.class,
+        Prescription.class,
+    }, version = 16)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract MedicineDao medicineDao();
+    public abstract PrescriptionDao prescriptionDao();
     public abstract HistoryDao historyDao();
 
     private static AppDatabase instance;
