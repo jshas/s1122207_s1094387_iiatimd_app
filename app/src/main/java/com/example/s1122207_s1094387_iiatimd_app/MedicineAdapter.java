@@ -20,7 +20,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.viewHo
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_card, parent, false);
+        View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicines_card, parent, false);
         return new viewHolder(v);
     }
 

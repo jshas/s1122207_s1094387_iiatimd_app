@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         String text = getString(R.string.welcome_text, person.getName().split(" ")[0]);
         nameDisplay.setText(text);
 
+        //Makes a recyclerview "timeline" with al the timelineItems
         mAdapter = new HistoryAdapter(timeline);
         mAdapter = new MedicineAdapter(medicines);
         /* MedicineAdapter

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
         private History[] timeline;
 
         //Wijs gegevens aan bij de adapter
-        public HistoryAdapter(Medicine[] timeline){
+        public HistoryAdapter(timelineItem[] timeline){
             this.timeline = timeline;
         }
 
@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
         @NonNull
         @Override
         public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_card, parent, false);
+            View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicines_card, parent, false);
             HistoryViewHolder historyViewHolder = new HistoryViewHolder(v);
             return historyViewHolder;
         }
