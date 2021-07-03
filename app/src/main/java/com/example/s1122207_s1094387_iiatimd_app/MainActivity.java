@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter mAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,28 +26,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.hasFixedSize();
 
 
-        // TODO: MEDICINE ARRAY
-        //  1) Replace hardcoded array with an API fetch
-        Medicine[] medicines = new Medicine[5];
-        medicines[0] = new Medicine(1, "Ibuprofen", 200d, "mg", 1);
-        medicines[1] = new Medicine(2, "Ritalin", 5d, "mg", 4);
-        medicines[2] = new Medicine(3, "Dexamfetamine", 2.5d, "mg", 4);
-        medicines[3] = new Medicine(4, "Advil", 1000d, "mg", 4);
-        medicines[4] = new Medicine(5, "Cough Syrup", 200d, "ml", 4);
 
 
-        User person = new User(1, "Sjon Haan", "sjonnie@testkip.nl");
 
-        //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
+        //FIXME:
+        // Replace .allowMainThreadQueries() with seperate Task Classes in project
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        db.medicineDao().insertAllMedicines(medicines);
-        db.userDao().insertUser(person);
+        //TODO:
+        // MEDICINE ARRAY
+        // 1) Replace database seeding with an API FETCH
+        AppDatabaseSeeder.insertAllUsersTask(db);
+        AppDatabaseSeeder.insertAllMedicinesTask(db);
+        AppDatabaseSeeder.insertAllPrescriptions(db);
 
-        // Gets welcome_text = Hello, (var)! And adds the User's name at (var).
-        String text = getString(R.string.welcome_text, person.getName().split(" ")[0]);
+        // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
+        String text;
+        text = getString(R.string.welcome_text, db.userDao().getUserNameById(1));
         nameDisplay.setText(text);
 
-        mAdapter = new MedicineAdapter(medicines);
+//        mAdapter = new MedicineAdapter(db.medicineDao().getAll());
+        mAdapter = new MedicineAndPrescriptionAdapter(db.medicineDao().getMedicinesWithPrescription());
+
         /* MedicineAdapter
          * Used to feed the recyclerView with data from the Medicine table.
          * Useful for displaying available medicines to be added to the AmountAndInterval.
