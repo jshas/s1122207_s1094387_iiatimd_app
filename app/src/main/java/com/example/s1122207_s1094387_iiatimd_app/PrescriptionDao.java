@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import java.util.List;
 
@@ -12,6 +13,10 @@ import java.util.List;
 public interface PrescriptionDao {
   @Query("SELECT * FROM Prescription;")
   List<Prescription> getAll();
+
+  @Transaction
+  @Query("SELECT * FROM prescription")
+  List<MedicineAndPrescription> getMedicinesWithPrescription();
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   void insertAll(Prescription... prescriptions);
