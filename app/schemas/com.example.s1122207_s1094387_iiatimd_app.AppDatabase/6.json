@@ -1,0 +1,204 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 6,
+    "identityHash": "4457c7e5ad2d07119af9e7edb3c36a47",
+    "entities": [
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` INTEGER NOT NULL, `name` TEXT, `email` TEXT, PRIMARY KEY(`userId`))",
+        "fields": [
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "userId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Medicine",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`medicineId` INTEGER NOT NULL, `name` TEXT, `amount` REAL NOT NULL, `unit` TEXT, PRIMARY KEY(`medicineId`))",
+        "fields": [
+          {
+            "fieldPath": "medicineId",
+            "columnName": "medicineId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "medicineId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "History",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`historyId` INTEGER NOT NULL, `prescriptionRefId` INTEGER NOT NULL, `takenDoses` REAL NOT NULL, `totalDoses` REAL NOT NULL, `createdAt` INTEGER, `completed` INTEGER NOT NULL, PRIMARY KEY(`historyId`))",
+        "fields": [
+          {
+            "fieldPath": "historyId",
+            "columnName": "historyId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prescriptionRefId",
+            "columnName": "prescriptionRefId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "takenDoses",
+            "columnName": "takenDoses",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalDoses",
+            "columnName": "totalDoses",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "completed",
+            "columnName": "completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "historyId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Prescription",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`prescriptionId` INTEGER NOT NULL, `medicineRefId` INTEGER NOT NULL, `singleDose` REAL NOT NULL, `frequency` INTEGER NOT NULL, `interval` INTEGER NOT NULL, PRIMARY KEY(`prescriptionId`), FOREIGN KEY(`medicineRefId`) REFERENCES `Medicine`(`medicineId`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "prescriptionId",
+            "columnName": "prescriptionId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "medicineRefId",
+            "columnName": "medicineRefId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "singleDose",
+            "columnName": "singleDose",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "frequency",
+            "columnName": "frequency",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "interval",
+            "columnName": "interval",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "prescriptionId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_Prescription_medicineRefId",
+            "unique": false,
+            "columnNames": [
+              "medicineRefId"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Prescription_medicineRefId` ON `${TABLE_NAME}` (`medicineRefId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Medicine",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "medicineRefId"
+            ],
+            "referencedColumns": [
+              "medicineId"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [
+      {
+        "viewName": "HistoryDetail",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT h.historyId as history_id, m.name as medicine_name, p.singleDose as single_dose_amount, h.takenDoses as taken_doses, p.frequency as total_doses, h.completed as completed FROM history as h JOIN prescription as p ON h.prescriptionRefId = p.prescriptionId JOIN medicine as m ON  p.medicineRefId = m.medicineId;"
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4457c7e5ad2d07119af9e7edb3c36a47')"
+    ]
+  }
+}
