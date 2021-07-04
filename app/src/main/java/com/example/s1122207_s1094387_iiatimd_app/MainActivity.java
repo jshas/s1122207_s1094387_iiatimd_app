@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
         //Recyclerview setup
-        recyclerView = findViewById(R.id.historyRecyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize();
