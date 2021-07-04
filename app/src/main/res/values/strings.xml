@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Pill Reminder</string>
-
+    <string-array name="medicine_names">
+        <item>Ibuprofen</item>
+        <item>Ritalin</item>
+        <item>Adderall</item>
+        <item>Advil</item>
+        <item>Cough Syrup</item>
+        <item>Vitamin D</item>
+        <item>Melatonin</item>
+    </string-array>
     <!-- %1$s is used for string variables-->
     <string name="welcome_text">Welcome %1$s</string>
     <string name="medicine_placeholder">Red Elixer</string>
