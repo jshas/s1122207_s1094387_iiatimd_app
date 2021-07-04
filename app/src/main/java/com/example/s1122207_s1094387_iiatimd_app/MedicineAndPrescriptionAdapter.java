@@ -1,6 +1,5 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ public class MedicineAndPrescriptionAdapter extends RecyclerView.Adapter<Medicin
 
     // Constructor
     public MedicineAndPrescriptionAdapter(List<MedicineAndPrescription> medicineAndPrescriptions) {
-        Log.d("List", medicineAndPrescriptions.toString());
         this.medicineAndPrescriptions = medicineAndPrescriptions;
 
     }
@@ -41,9 +39,9 @@ public class MedicineAndPrescriptionAdapter extends RecyclerView.Adapter<Medicin
         double formattedAmount = Double.parseDouble(
                 formatter.format(
                         medicineAndPrescriptions
-                                .get(position)
-                                .prescription
-                                .getSingleDose()));
+                        .get(position)
+                        .prescription
+                        .getSingleDose()));
         amountText = holder.itemView.getContext().getString(
                 R.string.medicine_amount,
                 String.valueOf(formattedAmount),

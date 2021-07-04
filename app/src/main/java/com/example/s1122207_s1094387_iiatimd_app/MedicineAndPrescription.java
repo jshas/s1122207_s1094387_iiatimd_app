@@ -5,11 +5,10 @@ import androidx.room.Relation;
 
 public class MedicineAndPrescription {
         @Embedded
-        public Medicine medicine;
+        Prescription prescription;
         @Relation(
-                parentColumn = "medicineId",
+                parentColumn = "medicineRefId",
                 entityColumn = "medicineId"
         )
-        public Prescription prescription;
-
+        public Medicine medicine;
 }
