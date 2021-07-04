@@ -1,21 +1,27 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(
+        foreignKeys = @ForeignKey(entity = Medicine.class, parentColumns = "medicineId", childColumns = "medicineRefId")
+        )
 public class Prescription {
     @PrimaryKey
     private long prescriptionId;
-    private long medicineId;
+    @ColumnInfo(index = true)
+    private long medicineRefId;
     private float singleDose; // How many
     private long frequency; // How many doses / per day
     private long interval; // How many hours/minutes between doses
 
-    public Prescription(long prescriptionId, long medicineId, float singleDose, long frequency, long interval ) {
+    public Prescription(long prescriptionId, long medicineRefId, float singleDose, long frequency, long interval ) {
         this.prescriptionId = prescriptionId;
-        this.medicineId = medicineId;
+        this.medicineRefId = medicineRefId;
         this.singleDose = singleDose;
         this.frequency = frequency;
         this.interval = interval; // in minutes
@@ -29,12 +35,12 @@ public class Prescription {
         this.prescriptionId = prescriptionId;
     }
 
-    public long getMedicineId() {
-        return medicineId;
+    public long getMedicineRefId() {
+        return medicineRefId;
     }
 
-    public void setMedicineId(long medicineId) {
-        this.medicineId = medicineId;
+    public void setMedicineRefId(long medicineId) {
+        this.medicineRefId = medicineId;
     }
 
     public float getSingleDose() {

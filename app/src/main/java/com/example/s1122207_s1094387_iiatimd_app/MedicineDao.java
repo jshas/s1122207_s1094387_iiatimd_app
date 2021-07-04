@@ -11,13 +11,9 @@ import java.util.List;
 
 @Dao
 public interface MedicineDao {
-
-    @Query("SELECT * FROM medicine")
-    List<Medicine> getAll();
-
     @Transaction
     @Query("SELECT * FROM medicine")
-    List<MedicineAndPrescription> getMedicinesWithPrescription();
+    List<Medicine> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAllMedicines(Medicine... medicine);
