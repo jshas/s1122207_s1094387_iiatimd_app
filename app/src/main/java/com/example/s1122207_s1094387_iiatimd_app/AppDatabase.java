@@ -5,13 +5,19 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-@Database(entities = {
-        User.class,
-        Medicine.class,
-        History.class,
-        Prescription.class,
-    }, version = 16)
+@Database(
+        entities = {
+                User.class,
+                Medicine.class,
+                History.class,
+                Prescription.class,
+        }
+            ,
+        views = {HistoryDetail.class},
+        version = 6)
+@TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract MedicineDao medicineDao();
@@ -29,6 +35,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase create(final Context context) {
         //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
-        return Room.databaseBuilder(context, AppDatabase.class, "PillDB").allowMainThreadQueries().fallbackToDestructiveMigration().build();
+        return Room.databaseBuilder(context, AppDatabase.class, "PillReminderData").allowMainThreadQueries().fallbackToDestructiveMigration().build();
     }
 }
