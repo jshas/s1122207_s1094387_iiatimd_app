@@ -1,0 +1,152 @@
+Index: app/src/main/java/com/example/s1122207_s1094387_iiatimd_app/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.s1122207_s1094387_iiatimd_app;\r\n\r\nimport android.os.Bundle;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    RecyclerView recyclerView;\r\n    RecyclerView.LayoutManager layoutManager;\r\n    RecyclerView.Adapter mAdapter;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        // nameDisplay\r\n        TextView nameDisplay = findViewById(R.id.textView);\r\n        //Recyclerview setup\r\n        recyclerView = findViewById(R.id.historyRecyclerView);\r\n        layoutManager = new LinearLayoutManager(this);\r\n        recyclerView.setLayoutManager(layoutManager);\r\n        recyclerView.hasFixedSize();\r\n\r\n\r\n        // TODO: MEDICINE ARRAY\r\n        //  1) Replace hardcoded array with an API fetch\r\n        //Medicine with info are created\r\n        Medicine[] medicines = new Medicine[5];\r\n        medicines[0] = new Medicine(1, \"Ibuprofen\", 200d, \"mg\", 1);\r\n        medicines[1] = new Medicine(2, \"Ritalin\", 5d, \"mg\", 4);\r\n        medicines[2] = new Medicine(3, \"Dexamfetamine\", 2.5d, \"mg\", 4);\r\n        medicines[3] = new Medicine(4, \"Advil\", 1000d, \"mg\", 4);\r\n        medicines[4] = new Medicine(5, \"Cough Syrup\", 200d, \"ml\", 4);\r\n\r\n        //TODO: replace hardcode user with login\r\n        //A User is created\r\n        User person = new User(1, \"Sjon Haan\", \"sjonnie@testkip.nl\");\r\n\r\n        //TODO: replace hardcore history with data from API\r\n        //A User creates a list with a medicine to take\r\n        MedicinesCard firstCard = new MedicinesCard(\"Sjon Haan\", medicines[0]);\r\n        //More medicines are added\r\n        firstCard.addMedicine(medicines[1]);\r\n        firstCard.addMedicine(medicines[4]);\r\n\r\n\r\n\r\n        //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project\r\n        AppDatabase db = AppDatabase.getInstance(getApplicationContext());\r\n        db.medicineDao().insertAllMedicines(medicines);\r\n        db.userDao().insertUser(person);\r\n\r\n        // Gets welcome_text = Hello, (var)! And adds the User's name at (var).\r\n        String text = getString(R.string.welcome_text, person.getName().split(\" \")[0]);\r\n        nameDisplay.setText(text);\r\n\r\n        //Makes a recyclerview \"timeline\" with al the timelineItems\r\n        mAdapter = new HistoryAdapter(timeline);\r\n        mAdapter = new MedicineAdapter(medicines);\r\n        /* MedicineAdapter\r\n         * Used to feed the recyclerView with data from the Medicine table.\r\n         * Useful for displaying available medicines to be added to the AmountAndInterval.\r\n         * TODO: CARDVIEW\r\n         *  1) Add/Remove button\r\n         *  2) Add 'Total Amount' selector. (How much is taken daily? e.g. 30mg)\r\n         *  3) Add interval\r\n         *  4) Optionally: Dose is calculated by: (total amount / interval) (e.g. dose = 30mg/4 = 7.5mg)\r\n         * */\r\n        recyclerView.setAdapter(mAdapter);\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/s1122207_s1094387_iiatimd_app/MainActivity.java	(revision ec31028bf8ce9290d71f9e0ca70f22decc4fae43)
++++ app/src/main/java/com/example/s1122207_s1094387_iiatimd_app/MainActivity.java	(date 1625411440129)
+@@ -1,6 +1,7 @@
+ package com.example.s1122207_s1094387_iiatimd_app;
+ 
+ import android.os.Bundle;
++import android.util.Log;
+ import android.widget.TextView;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -10,7 +11,7 @@
+ public class MainActivity extends AppCompatActivity {
+     RecyclerView recyclerView;
+     RecyclerView.LayoutManager layoutManager;
+-    RecyclerView.Adapter mAdapter;
++    RecyclerView.Adapter recyclerViewAdapter;
+ 
+ 
+     @Override
+@@ -48,6 +49,16 @@
+         firstCard.addMedicine(medicines[1]);
+         firstCard.addMedicine(medicines[4]);
+ 
++        //New timeline items
++        TimelineItem timelineItem1 = new TimelineItem("Today ma friend", firstCard);
++        TimelineItem timelineItem2 = new TimelineItem("Today ma friend", firstCard);
++        TimelineItem timelineItem3 = new TimelineItem("Today ma friend", firstCard);
++
++        //CREATE A HISTORY AND ADD THE ITEMS
++        History test_timeline = new History();
++        test_timeline.addTimelineItem(timelineItem1);
++        test_timeline.addTimelineItem(timelineItem2);
++        test_timeline.addTimelineItem(timelineItem3);
+ 
+ 
+         //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
+@@ -59,9 +70,11 @@
+         String text = getString(R.string.welcome_text, person.getName().split(" ")[0]);
+         nameDisplay.setText(text);
+ 
+-        //Makes a recyclerview "timeline" with al the timelineItems
+-        mAdapter = new HistoryAdapter(timeline);
+-        mAdapter = new MedicineAdapter(medicines);
++        //Makes a recyclerView test_timeline with al the timelineItems
++        recyclerViewAdapter = new HistoryAdapter(test_timeline.getTimeLine());
++        recyclerView.setAdapter(recyclerViewAdapter);
++
++        Log.d(test_timeline.getTimeLine().get(0).toString());
+         /* MedicineAdapter
+          * Used to feed the recyclerView with data from the Medicine table.
+          * Useful for displaying available medicines to be added to the AmountAndInterval.
+@@ -71,7 +84,6 @@
+          *  3) Add interval
+          *  4) Optionally: Dose is calculated by: (total amount / interval) (e.g. dose = 30mg/4 = 7.5mg)
+          * */
+-        recyclerView.setAdapter(mAdapter);
+ 
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/s1122207_s1094387_iiatimd_app/HistoryAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.s1122207_s1094387_iiatimd_app;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\n    public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {\r\n        private History[] timeline;\r\n\r\n        //Wijs gegevens aan bij de adapter\r\n        public HistoryAdapter(timelineItem[] timeline){\r\n            this.timeline = timeline;\r\n        }\r\n\r\n        public static class HistoryViewHolder extends RecyclerView.ViewHolder{\r\n            public TextView textView;\r\n\r\n            //Replace textView with a whole card\r\n            public HistoryViewHolder(View v){\r\n                super(v);\r\n                textView = v.findViewById(R.id.dateTextView);\r\n            }\r\n        }\r\n        @NonNull\r\n        @Override\r\n        public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n            View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicines_card, parent, false);\r\n            HistoryViewHolder historyViewHolder = new HistoryViewHolder(v);\r\n            return historyViewHolder;\r\n        }\r\n\r\n        @Override\r\n        public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {\r\n            holder.textView.setText(timeline[position].getName()); //tekst op positie = positie in pillen[]\r\n        }\r\n\r\n        @Override\r\n        public int getItemCount() { //Moet weten hoe groot array is\r\n            return timeline.length;\r\n        }\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/s1122207_s1094387_iiatimd_app/HistoryAdapter.java	(revision ec31028bf8ce9290d71f9e0ca70f22decc4fae43)
++++ app/src/main/java/com/example/s1122207_s1094387_iiatimd_app/HistoryAdapter.java	(date 1625409055610)
+@@ -9,40 +9,45 @@
+ import androidx.cardview.widget.CardView;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+-    public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
+-        private History[] timeline;
++import java.util.ArrayList;
++
++public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
++
++    private ArrayList<TimelineItem> timeline;
+ 
+-        //Wijs gegevens aan bij de adapter
+-        public HistoryAdapter(timelineItem[] timeline){
+-            this.timeline = timeline;
+-        }
++
++    public HistoryAdapter(ArrayList<TimelineItem> timeline){
++        this.timeline = timeline;
++    }
+ 
+-        public static class HistoryViewHolder extends RecyclerView.ViewHolder{
+-            public TextView textView;
++    public static class HistoryViewHolder extends RecyclerView.ViewHolder{
++        public TextView dateTextView; //NOTE: Cardview want geen TextView?
+ 
+-            //Replace textView with a whole card
+-            public HistoryViewHolder(View v){
+-                super(v);
+-                textView = v.findViewById(R.id.dateTextView);
+-            }
+-        }
+-        @NonNull
+-        @Override
+-        public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-            View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicines_card, parent, false);
+-            HistoryViewHolder historyViewHolder = new HistoryViewHolder(v);
+-            return historyViewHolder;
+-        }
++        public HistoryViewHolder(View v){
++            super(v);
++            dateTextView = v.findViewById(R.id.dateTextView); //verkeerde ID??
++        }
++    }
++
++    @NonNull
++    @Override
++    public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        //Make Cardview bases on timeline_item.xml
++        View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.timeline_item,parent,false);
++        //Make Viewholder and return
++        HistoryViewHolder historyViewHolder = new HistoryViewHolder(v);
++        return historyViewHolder;
++    }
+ 
+-        @Override
+-        public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
+-            holder.textView.setText(timeline[position].getName()); //tekst op positie = positie in pillen[]
+-        }
++    @Override
++    public void onBindViewHolder(@NonNull HistoryAdapter.HistoryViewHolder holder, int position) {
++        //Set holder to view
++        holder.dateTextView.setText(timeline.get(position).getDate()); //Gaat het hier mis?
++    }
+ 
+-        @Override
+-        public int getItemCount() { //Moet weten hoe groot array is
+-            return timeline.length;
+-        }
++    @Override
++    public int getItemCount() {
++        return timeline.toArray().length;
++    }
+ 
+ }
+-

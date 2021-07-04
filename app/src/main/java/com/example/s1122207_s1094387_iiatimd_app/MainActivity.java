@@ -1,13 +1,17 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter mAdapter;
@@ -17,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button toMedicineUserButton = findViewById(R.id.toMedicineUserScreen);
+        toMedicineUserButton.setOnClickListener(this);
 
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
@@ -60,5 +67,11 @@ public class MainActivity extends AppCompatActivity {
          * */
         recyclerView.setAdapter(mAdapter);
 
+    }
+
+    public void onClick(View v){
+        Log.d("Scherm2", "Test scherm2");
+        Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
+        startActivity(toMedicineUserIntent);
     }
 }
