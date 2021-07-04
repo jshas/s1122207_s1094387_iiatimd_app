@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter mAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
         //Recyclerview setup
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.historyRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize();
-
 
 
         //FIXME:
@@ -41,12 +41,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TODO:
         // MEDICINE ARRAY
         // 1) Replace database seeding with an API FETCH
-//        AppDatabaseSeeder.insertAllUsersTask(db);
-//        AppDatabaseSeeder.insertAllMedicinesTask(db);
-//        AppDatabaseSeeder.insertAllPrescriptions(db);
-//        AppDatabaseSeeder.insertAllHistory(db);
+        AppDatabaseSeeder.insertAllUsersTask(db);
+        AppDatabaseSeeder.insertAllMedicinesTask(db);
+        AppDatabaseSeeder.insertAllPrescriptions(db);
+        AppDatabaseSeeder.insertAllHistory(db);
+
+        // TODO: MEDICINE ARRAY
+        //  1) Replace hardcoded array with an API fetch
+
+        //TODO: replace hardcode user with login
+        //A User is created
+        User person = new User(1, "Sjon Haan", "sjonnie@testkip.nl");
+
+        //TODO: replace hardcore history with data from API
+        //A User creates a list with a medicine to take
+        MedicinesCard firstCard = new MedicinesCard("Sjon Haan", db.medicineDao().getAll().get(1));
+
+        //More medicines are added
 
 
+
+
+        //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
+        db.medicineDao().insertAllMedicines();
+        db.userDao().insertUser(person);
 
 
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
@@ -54,9 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         text = getString(R.string.welcome_text, db.userDao().getUserNameById(1));
         nameDisplay.setText(text);
 
-//        mAdapter = new MedicineAdapter(db.medicineDao().getAll());
-        mAdapter = new MedicineAndPrescriptionAdapter(db.prescriptionDao().getMedicinesWithPrescription());
-
+        //Makes a recyclerview "timeline" with al the timelineItems
+        //FIXME
+        //mAdapter = new HistoryAdapter(timeline);
+        //mAdapter = new MedicineAdapter(medicines);
         /* MedicineAdapter
          * Used to feed the recyclerView with data from the Medicine table.
          * Useful for displaying available medicines to be added to the AmountAndInterval.

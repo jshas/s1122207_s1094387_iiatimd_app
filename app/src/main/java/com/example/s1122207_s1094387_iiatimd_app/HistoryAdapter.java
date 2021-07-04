@@ -10,37 +10,41 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
     public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
-        private Medicine[] ritalin;
+        private TimelineItem[] history;
 
         //Wijs gegevens aan bij de adapter
-        public HistoryAdapter(Medicine[] ritalin){
-            this.ritalin = ritalin;
+        public HistoryAdapter(TimelineItem[] timeline){
+            this.history = timeline;
         }
 
         public static class HistoryViewHolder extends RecyclerView.ViewHolder{
-            public TextView textView;
+            public TextView dateTextView;
 
+            //Replace textView with a whole card
             public HistoryViewHolder(View v){
                 super(v);
-                textView = v.findViewById(R.id.textView);
+                dateTextView = v.findViewById(R.id.dateTextView);
             }
         }
         @NonNull
         @Override
         public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicine_card, parent, false);
+            View v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.medicines_card, parent, false);
             HistoryViewHolder historyViewHolder = new HistoryViewHolder(v);
             return historyViewHolder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-            holder.textView.setText(ritalin[position].getName()); //tekst op positie = positie in pillen[]
+            //Puts date in View
+            holder.dateTextView.setText(history[position].getDate());
+            //TODO: Puts medicineCard in View
         }
 
         @Override
         public int getItemCount() { //Moet weten hoe groot array is
-            return ritalin.length;
+            return history.length;
         }
 
 }
+

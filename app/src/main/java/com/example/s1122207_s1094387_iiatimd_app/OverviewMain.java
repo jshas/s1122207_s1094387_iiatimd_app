@@ -1,5 +1,7 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
+// DEZE CLASS IS NIET MEER NODIG //
+
 import android.os.Bundle;
 import android.util.Log;
 
@@ -27,10 +29,8 @@ public class OverviewMain extends AppCompatActivity {
         recyclerView.hasFixedSize(); //Tenzij de lijst dat niet heeft
 
 
-        //Hier de array met data
-        Medicine[] ritalin = new Medicine[5];
-
-        recyclerViewAdapter = new HistoryAdapter(ritalin);
+        //recyclerViewAdapter = new HistoryAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 }
+
