@@ -14,12 +14,13 @@
     <string name="medicine_placeholder">Red Elixer</string>
     <string name="medicine_amount">Dose: %1$s %2$s</string>
     <string name="medicine_name">Medicine</string>
+    <string name="timeline_date">Today</string>
 
+    <!-- buttons -->
     <string name="button_medicine_add">Add Medicine To Prescription</string>
     <string name="button_medicine_fetch">Update Medicine</string>
     <string name="button_medicine_timeline">Medicine History</string>
     <string name="done">Done</string>
-    <string name="timeline_date">Today</string>
     <string name="button_add_medicine">Add Medicine</string>
     <string name="to_medicine_screen">To Medicine Screen</string>
 

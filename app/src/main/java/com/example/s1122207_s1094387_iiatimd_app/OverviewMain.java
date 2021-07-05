@@ -18,7 +18,7 @@ public class OverviewMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstances){
         super.onCreate(savedInstances);
-        setContentView(R.layout.overview_main);
+        setContentView(R.layout.timeline_activity);
 
         Bundle myBundle = getIntent().getExtras();
         Log.d("bundle test",myBundle.getString("name"));

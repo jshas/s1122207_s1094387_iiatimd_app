@@ -1,5 +1,6 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter mAdapter;
 
 
     @Override
@@ -37,32 +37,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
         // Main buttons with single onClickListener
-       Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
-        toMedicineUserButton.setOnClickListener(this);
-       Button buttonMedicineAdd = findViewById(R.id.addMedicine);
-        buttonMedicineAdd.setOnClickListener(this);
-       Button buttonMedicineTimeline = findViewById(R.id.medicineTimeline);
-        buttonMedicineTimeline.setOnClickListener(this);
-
-        // FETCH NEW MEDICINES FROM THE BACKEND
-       Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
-        buttonAPIFetch.setOnClickListener((View v) -> {
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
-                    (Request.Method.GET, MEDICINE_URL, null,
-                            Medicine::fromJson,
-                            error    -> Log.e("API Fetch error", "Foute boel in de API.")
-//                    error.getMessage(
-                    );
-            vs.addToRequestQueue(jsonArrayRequest);
-        });
+        Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
+        toMedicineUserButton.setOnClickListener((View v) -> {
+                Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
+                startActivity(toMedicineUserIntent);
+            }
+        );
+        Button buttonMedicineTimeline = findViewById(R.id.toMedicineTimeline);
+        buttonMedicineTimeline.setOnClickListener((View v) -> {
+                    Intent toTimelineActivity = new Intent(this, TimelineActivity.class);
+                    startActivity(toTimelineActivity);
+                }
+        );
 
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
-        //Recyclerview setup
-        recyclerView = findViewById(R.id.navigationRecyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.hasFixedSize();
+
 
 
 
@@ -79,41 +69,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TODO: replace hardcode user with login
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
         String text;
-        String firstUserName = db.userDao().getById(2).getName().split(" ")[0];
+        String firstUserName = db.userDao().getById(0).getName();
         text = getString(R.string.welcome_text, firstUserName);
         nameDisplay.setText(text);
 
         //A User creates a list with a medicine to take
         MedicinesCard firstCard = new MedicinesCard(firstUserName, db.medicineDao().getAll().get(1));
-
-
-        //Makes a recyclerview "timeline" with al the timelineItems
-
-        //mAdapter = new HistoryAdapter(timeline);
-
-        // Returns the the medc
-        mAdapter = new MedicineAdapter(db.medicineDao().getAll());
-//        recyclerView.setAdapter(mAdapter);
-
     }
 
-    public void onClick(View v){
-        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
-        String viewId = getResources().getResourceEntryName(v.getId());
-        switch (viewId){
-            case "toMedicineScreen":
-                Log.d("vID", viewId);
-                Log.d("Scherm2", "Test scherm2");
-                Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
-                startActivity(toMedicineUserIntent);
-                break;
-            case "addMedicine":
-                Log.d("vID-add", viewId);
-                break;
-            case "medicineTimeline":
-                Log.d("vID-timeline", viewId);
-                break;
-        }
+    @Override
+    public void onClick(View v) {
 
     }
 }
