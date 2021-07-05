@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //TODO: replace hardcode user with login
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
-//        String text;
+        String text;
 //        String firstUserName = db.userDao().getById(0).getName();
-//        text = getString(R.string.welcome_text, firstUserName);
-//        nameDisplay.setText(text);
+        text = getString(R.string.welcome_text, "Jeroen");
+        nameDisplay.setText(text);
 
         //A User creates a list with a medicine to take
 //        MedicinesCard firstCard = new MedicinesCard(firstUserName, db.medicineDao().getAll().get(1));
