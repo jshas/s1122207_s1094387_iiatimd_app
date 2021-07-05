@@ -63,29 +63,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
         String text;
-        text = getString(R.string.welcome_text, db.userDao().getUserNameById(1));
+//        String firstUserName = db.userDao().getById(0).getName();
+        String firstUserName = "userDao() needs help.";
+        text = getString(R.string.welcome_text, firstUserName);
         nameDisplay.setText(text);
 
+        //A User creates a list with a medicine to take
+        MedicinesCard firstCard = new MedicinesCard(firstUserName, db.medicineDao().getAll().get(1));
+
+
         //Makes a recyclerview "timeline" with al the timelineItems
-        //FIXME
+
         //mAdapter = new HistoryAdapter(timeline);
-        //mAdapter = new MedicineAdapter(medicines);
-        /* MedicineAdapter
-         * Used to feed the recyclerView with data from the Medicine table.
-         * Useful for displaying available medicines to be added to the AmountAndInterval.
-         * TODO: CARDVIEW
-         *  1) Add/Remove button
-         *  2) Add 'Total Amount' selector. (How much is taken daily? e.g. 30mg)
-         *  3) Add interval
-         *  4) Optionally: Dose is calculated by: (total amount / interval) (e.g. dose = 30mg/4 = 7.5mg)
-         * */
-        recyclerView.setAdapter(mAdapter);
+
+        // Returns the the medc
+        mAdapter = new MedicineAdapter(db.medicineDao().getAll());
+//        recyclerView.setAdapter(mAdapter);
 
     }
 
     public void onClick(View v){
-        Log.d("Scherm2", "Test scherm2");
-        Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
-        startActivity(toMedicineUserIntent);
+        String viewId = getResources().getResourceEntryName(v.getId());
+        switch (viewId){
+            case "toMedicineScreen":
+                Log.d("vID", viewId);
+                Log.d("Scherm2", "Test scherm2");
+                Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
+                startActivity(toMedicineUserIntent);
+                break;
+            case "addMedicine":
+                Log.d("vID-add", viewId);
+                break;
+            case "medicineTimeline":
+                Log.d("vID-timeline", viewId);
+                break;
+            case "fetchMedicine":
+                Log.d("vID-fetch", viewId);
+                break;
+            default:
+                Log.e("mainActivity.onClick","No matching viewId found.");
+        }
+
+    }
+
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        //
+
     }
 }
