@@ -26,5 +26,6 @@
     <string name="done">Done</string>
     <string name="button_add_medicine">Add Medicine</string>
     <string name="to_medicine_screen">To Medicine Screen</string>
+    <string name="button_login">Login</string>
 
 </resources>
