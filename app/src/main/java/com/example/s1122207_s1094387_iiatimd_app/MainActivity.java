@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String MEDICINE_URL = "http://10.0.2.2:8000/api/medicine";
+
         setContentView(R.layout.activity_main);
         VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(toMedicineUserIntent);
                 }
         );
+
         Button buttonMedicineTimeline = findViewById(R.id.toMedicineTimeline);
         buttonMedicineTimeline.setOnClickListener((View v) -> {
                     Intent toTimelineActivity = new Intent(this, TimelineActivity.class);
@@ -35,27 +36,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
         );
         // FETCH NEW MEDICINES FROM THE BACKEND
-        Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
-        buttonAPIFetch.setOnClickListener((View v) -> {
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                    MEDICINE_URL,
-                    null,
-                    response -> db.medicineDao().insertAllMedicines(Medicine.fromJson(response)),
-                    error -> Log.e("API Fetch error", error.getMessage()));
-            vs.addToRequestQueue(jsonArrayRequest);
 
-        });
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.nameTextView);
 
-//         TODO: Remove seeded data and seeders in production version
+        // TODO: Remove seeded data and seeders in production version
         AppDatabaseSeeder.insertAllUsersTask(db);
         AppDatabaseSeeder.insertAllMedicinesTask(db);
-        AppDatabaseSeeder.insertAllPrescriptions(db);
-        AppDatabaseSeeder.insertAllHistory(db);
 //        Drop prescription and history
-//        db.prescriptionDao().deleteAll();
-//        db.historyDao().deleteAll();
+        db.prescriptionDao().deleteAll();
+        db.historyDao().deleteAll();
 
 
         // TODO: MEDICINE ARRAY

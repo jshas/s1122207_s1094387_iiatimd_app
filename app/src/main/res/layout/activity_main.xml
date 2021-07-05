@@ -12,20 +12,13 @@
 
     <Button
         android:id="@+id/toMedicineScreen"
-        android:layout_width="352dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#651FFF"
-        android:gravity="fill_vertical"
-        android:hapticFeedbackEnabled="true"
         android:text="@string/to_medicine_screen"
-        android:textAlignment="center"
-        android:textAllCaps="true"
         app:iconPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-        tools:ignore="RtlCompat" />
+        tools:ignore="RtlCompat"
+        style="@style/button_style" />
 
     <Button
         android:id="@+id/toMedicineTimeline"

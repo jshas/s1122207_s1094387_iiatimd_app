@@ -11,10 +11,11 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+
 public class TimelineActivity extends Activity implements View.OnClickListener{
 
-    VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
-    AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
@@ -27,6 +28,10 @@ public class TimelineActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onCreate(Bundle savedInstances) {
+        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+
+        final String MEDICINE_URL = "http://10.0.2.2:8000/api/medicine";
         super.onCreate(savedInstances);
         setContentView(R.layout.timeline_activity);
 
@@ -40,9 +45,15 @@ public class TimelineActivity extends Activity implements View.OnClickListener{
         //recyclerView.setAdapter(recyclerViewAdapter);
 
 
-        Button updateButton = findViewById(R.id.fetchMedicine);
-        updateButton.setOnClickListener((View v) -> {
-            Log.d("test","test");
+        Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
+        buttonAPIFetch.setOnClickListener((View v) -> {
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                    MEDICINE_URL,
+                    null,
+                    response -> db.medicineDao().insertAllMedicines(Medicine.fromJson(response)),
+                    error -> Log.e("API Fetch error", error.getMessage()));
+            vs.addToRequestQueue(jsonArrayRequest);
+
         });
 
         Button toMainActivity = findViewById(R.id.toMainActivityButton);

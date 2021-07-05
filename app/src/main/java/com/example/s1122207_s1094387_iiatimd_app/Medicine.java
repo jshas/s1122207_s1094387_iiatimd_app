@@ -1,6 +1,8 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -65,11 +67,13 @@ public class Medicine {
     }
 
     public static Medicine[] fromJson(JSONArray jsonArray) throws JsonParseException {
+
         Gson gson = new Gson();
         Medicine[] medicines = gson.fromJson(jsonArray.toString(), Medicine[].class);
         for (Medicine medicine : medicines) {
             Log.d("TestJSONformatter", (String) medicine.getName());
         }
+
         return medicines;
     }
 

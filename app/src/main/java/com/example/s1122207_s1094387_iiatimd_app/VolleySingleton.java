@@ -2,6 +2,7 @@ package com.example.s1122207_s1094387_iiatimd_app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,6 +32,7 @@ public class VolleySingleton {
             // getApplicationContext() is key, it keeps you from leaking the
             // Activity or BroadcastReceiver if someone passes one in.
             requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
+            Toast.makeText(ctx, "Update Completed", Toast.LENGTH_SHORT).show();
         }
         return requestQueue;
     }
@@ -38,7 +40,5 @@ public class VolleySingleton {
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
     };
-
-
 
 }
