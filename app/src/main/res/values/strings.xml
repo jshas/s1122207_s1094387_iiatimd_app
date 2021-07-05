@@ -18,6 +18,7 @@
     <string name="medicine_amount">Dose: %1$s %2$s</string>
     <string name="medicine_name">Medicine</string>
     <string name="timeline_date">Today</string>
+    <string name="register_text">Create Account:</string>
 
     <!-- buttons -->
     <string name="button_medicine_add">Add Medicine To Prescription</string>
