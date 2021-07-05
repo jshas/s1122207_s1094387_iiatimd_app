@@ -6,7 +6,16 @@ import androidx.room.PrimaryKey;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-//TODO:Medicinecard moet MedicineAndPrescription worden
+
+/* TODO:Medicinecard moet MedicineAndPrescription worden
+ *
+ * TODO: CARDVIEW
+ *  1) Add/Remove button
+ *  2) Add 'Total Amount' selector. (How much is taken daily? e.g. 30mg)
+ *  3) Add interval
+ *  4) Optionally: Dose is calculated by: (total amount / interval) (e.g. dose = 30mg/4 = 7.5mg)
+ *
+ */
 
 public class MedicinesCard {
 

@@ -16,7 +16,7 @@ import androidx.room.TypeConverters;
         }
             ,
         views = {HistoryDetail.class},
-        version = 6)
+        version = 7)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();

@@ -4,50 +4,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:fadeScrollbars="true"
+    android:fitsSystemWindows="false"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="386dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center_vertical"
-        android:text="@string/welcome_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="40sp"
-        android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/historyRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/historyRecyclerView"
+        android:id="@+id/navigationRecyclerView"
         android:layout_width="410dp"
-        android:layout_height="614dp"
-        android:layout_marginBottom="4dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="152dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomAppBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/toMedicineUserScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        android:id="@+id/fetchMedicine"
+        android:layout_width="352dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="16dp"
+        android:background="#B39DDB"
+        android:hapticFeedbackEnabled="true"
+        android:text="@string/button_medicine_fetch"
+        android:typeface="normal"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicineTimeline" />
+
+    <Button
+        android:id="@+id/addMedicine"
+        android:layout_width="352dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="4dp"
+        android:background="#B39DDB"
+        android:backgroundTint="#B39DDB"
+        android:backgroundTintMode="add"
+        android:text="@string/button_add_medicine"
+        android:typeface="normal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toMedicineScreen" />
+
+    <Button
+        android:id="@+id/toMedicineScreen"
+        android:layout_width="352dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#651FFF"
+        android:gravity="fill_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:text="To Medicine Screen"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        app:iconPadding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:ignore="RtlCompat" />
+
+    <Button
+        android:id="@+id/medicineTimeline"
+        android:layout_width="352dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="16dp"
+        android:background="#B39DDB"
+        android:hapticFeedbackEnabled="true"
+        android:text="@string/button_medicine_timeline"
+        android:typeface="normal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMedicine" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="408dp"
+        android:layout_height="110dp"
+        android:backgroundTint="#B388FF"
+        android:backgroundTintMode="screen"
+        android:fontFamily="sans-serif"
+        android:gravity="center_vertical"
+        android:includeFontPadding="true"
+        android:paddingLeft="16dp"
+        android:text="@string/welcome_text"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="40sp"
+        android:typeface="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/bottomAppBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar2"
+            style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+            android:layout_width="412dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_anchor="@+id/bottomAppBar2"
+            app:layout_anchorGravity="center" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

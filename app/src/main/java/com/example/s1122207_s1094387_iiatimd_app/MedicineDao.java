@@ -24,4 +24,7 @@ public interface MedicineDao {
     @Delete
     void delete(Medicine medicine);
 
+    @Query("DELETE FROM medicine;")
+    void deleteAll();
+
 }
