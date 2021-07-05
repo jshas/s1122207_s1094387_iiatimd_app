@@ -11,7 +11,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter mAdapter;
@@ -25,8 +36,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
-        Button toMedicineUserButton = findViewById(R.id.toMedicineUserScreen);
+        // Main buttons with single onClickListener
+       Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
         toMedicineUserButton.setOnClickListener(this);
+       Button buttonMedicineAdd = findViewById(R.id.addMedicine);
+        buttonMedicineAdd.setOnClickListener(this);
+       Button buttonMedicineTimeline = findViewById(R.id.medicineTimeline);
+        buttonMedicineTimeline.setOnClickListener(this);
+
+        // FETCH NEW MEDICINES FROM THE BACKEND
+       Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
+        buttonAPIFetch.setOnClickListener((View v) -> {
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                    (Request.Method.GET, MEDICINE_URL, null,
+                            Medicine::fromJson,
+                            error    -> Log.e("API Fetch error", "Foute boel in de API.")
+//                    error.getMessage(
+                    );
+            vs.addToRequestQueue(jsonArrayRequest);
+        });
 
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
@@ -37,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.hasFixedSize();
 
 
-        //FIXME:
-        // Replace .allowMainThreadQueries() with seperate Task Classes in project
-        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
 
 //         TODO: Remove seeded data and seeders in production version
@@ -52,49 +77,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //  1) Replace hardcoded array with an API fetch
 
         //TODO: replace hardcode user with login
-        //A User is created
-        User person = new User(1, "Sjon Haan", "sjonnie@testkip.nl");
-
-        //TODO: replace hardcore history with data from API
-        //A User creates a list with a medicine to take
-        MedicinesCard firstCard = new MedicinesCard("Sjon Haan", db.medicineDao().getAll().get(1));
-
-        //More medicines are added
-
-
-
-
-        //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
-        db.medicineDao().insertAllMedicines();
-        db.userDao().insertUser(person);
-
-
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
         String text;
         String firstUserName = db.userDao().getById(2).getName().split(" ")[0];
         text = getString(R.string.welcome_text, firstUserName);
         nameDisplay.setText(text);
 
+        //A User creates a list with a medicine to take
+        MedicinesCard firstCard = new MedicinesCard(firstUserName, db.medicineDao().getAll().get(1));
+
+
         //Makes a recyclerview "timeline" with al the timelineItems
-        //FIXME
+
         //mAdapter = new HistoryAdapter(timeline);
-        //mAdapter = new MedicineAdapter(medicines);
-        /* MedicineAdapter
-         * Used to feed the recyclerView with data from the Medicine table.
-         * Useful for displaying available medicines to be added to the AmountAndInterval.
-         * TODO: CARDVIEW
-         *  1) Add/Remove button
-         *  2) Add 'Total Amount' selector. (How much is taken daily? e.g. 30mg)
-         *  3) Add interval
-         *  4) Optionally: Dose is calculated by: (total amount / interval) (e.g. dose = 30mg/4 = 7.5mg)
-         * */
-        recyclerView.setAdapter(mAdapter);
+
+        // Returns the the medc
+        mAdapter = new MedicineAdapter(db.medicineDao().getAll());
+//        recyclerView.setAdapter(mAdapter);
 
     }
 
     public void onClick(View v){
-        Log.d("Scherm2", "Test scherm2");
-        Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
-        startActivity(toMedicineUserIntent);
+        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
+        String viewId = getResources().getResourceEntryName(v.getId());
+        switch (viewId){
+            case "toMedicineScreen":
+                Log.d("vID", viewId);
+                Log.d("Scherm2", "Test scherm2");
+                Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
+                startActivity(toMedicineUserIntent);
+                break;
+            case "addMedicine":
+                Log.d("vID-add", viewId);
+                break;
+            case "medicineTimeline":
+                Log.d("vID-timeline", viewId);
+                break;
+        }
+
     }
 }
