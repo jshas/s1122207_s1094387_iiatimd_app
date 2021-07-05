@@ -7,10 +7,11 @@
 
     <Spinner
         android:id="@+id/medicineNames"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="219dp"
+        android:layout_height="43dp"
+        app:layout_constraintBottom_toBottomOf="@id/addMedicineButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +29,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please select a medication to track:"
+        android:text="Choose a medicine to track"
         app:layout_constraintBottom_toTopOf="@+id/medicineNames"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

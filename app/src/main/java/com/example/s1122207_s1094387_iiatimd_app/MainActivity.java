@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AppDatabaseSeeder.insertAllPrescriptions(db);
         AppDatabaseSeeder.insertAllHistory(db);
 
-        // TODO: MEDICINE ARRAY
-        //  1) Replace hardcoded array with an API fetch
 
         //TODO: replace hardcode user with login
         //A User is created
@@ -56,10 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TODO: replace hardcore history with data from API
         //A User creates a list with a medicine to take
         MedicinesCard firstCard = new MedicinesCard("Sjon Haan", db.medicineDao().getAll().get(1));
-
-        //More medicines are added
-
-
 
 
         //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
