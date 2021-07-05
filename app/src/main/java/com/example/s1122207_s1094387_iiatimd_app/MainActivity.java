@@ -11,16 +11,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter mAdapter;
+    // SINGLETONS // //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final String MEDICINE_URL = "http://10.0.2.2:8000/api/medicine";
         setContentView(R.layout.activity_main);
+        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
         // Main buttons with single onClickListener
        Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
@@ -29,8 +45,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonMedicineAdd.setOnClickListener(this);
        Button buttonMedicineTimeline = findViewById(R.id.medicineTimeline);
         buttonMedicineTimeline.setOnClickListener(this);
+
+        // FETCH NEW MEDICINES FROM THE BACKEND
        Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
-        buttonAPIFetch.setOnClickListener(this);
+        buttonAPIFetch.setOnClickListener((View v) -> {
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
+                    (Request.Method.GET, MEDICINE_URL, null,
+                            Medicine::fromJson,
+                            error    -> Log.e("API Fetch error", "Foute boel in de API.")
+//                    error.getMessage(
+                    );
+            vs.addToRequestQueue(jsonArrayRequest);
+        });
 
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
@@ -40,16 +66,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize();
 
-        // SINGLETONS // //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
-        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
-        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
 
-        // TODO: Remove seeded data and seeders in production version
-//        AppDatabaseSeeder.insertAllUsersTask(db);
-//        AppDatabaseSeeder.insertAllMedicinesTask(db);
-//        AppDatabaseSeeder.insertAllPrescriptions(db);
-//        AppDatabaseSeeder.insertAllHistory(db);
+
+//         TODO: Remove seeded data and seeders in production version
+        AppDatabaseSeeder.insertAllUsersTask(db);
+        AppDatabaseSeeder.insertAllMedicinesTask(db);
+        AppDatabaseSeeder.insertAllPrescriptions(db);
+        AppDatabaseSeeder.insertAllHistory(db);
 
         // TODO: MEDICINE ARRAY
         //  1) Replace hardcoded array with an API fetch
@@ -57,8 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TODO: replace hardcode user with login
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
         String text;
-//        String firstUserName = db.userDao().getById(0).getName();
-        String firstUserName = "userDao() needs help.";
+        String firstUserName = db.userDao().getById(2).getName().split(" ")[0];
         text = getString(R.string.welcome_text, firstUserName);
         nameDisplay.setText(text);
 
@@ -77,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View v){
+        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
         String viewId = getResources().getResourceEntryName(v.getId());
         switch (viewId){
             case "toMedicineScreen":
@@ -91,19 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case "medicineTimeline":
                 Log.d("vID-timeline", viewId);
                 break;
-            case "fetchMedicine":
-                Log.d("vID-fetch", viewId);
-                break;
-            default:
-                Log.e("mainActivity.onClick","No matching viewId found.");
         }
-
-    }
-
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        //
 
     }
 }
