@@ -1,5 +1,6 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    RecyclerView.Adapter mAdapter;
 
 
     @Override
@@ -23,20 +23,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         // Main buttons with single onClickListener
-       Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
-        toMedicineUserButton.setOnClickListener(this);
-       Button buttonMedicineTimeline = findViewById(R.id.medicineTimeline);
-        buttonMedicineTimeline.setOnClickListener(this);
-       Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
-        buttonAPIFetch.setOnClickListener(this);
+        Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
+        toMedicineUserButton.setOnClickListener((View v) -> {
+                Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
+                startActivity(toMedicineUserIntent);
+            }
+        );
+        Button buttonMedicineTimeline = findViewById(R.id.toMedicineTimeline);
+        buttonMedicineTimeline.setOnClickListener((View v) -> {
+                    Intent toTimelineActivity = new Intent(this, TimelineActivity.class);
+                    startActivity(toTimelineActivity);
+                }
+        );
 
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
-        //Recyclerview setup
-        recyclerView = findViewById(R.id.navigationRecyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.hasFixedSize();
+
 
         // SINGLETONS // //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
         VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
@@ -44,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // TODO: Remove seeded data and seeders in production version
-//        AppDatabaseSeeder.insertAllUsersTask(db);
-//        AppDatabaseSeeder.insertAllMedicinesTask(db);
-//        AppDatabaseSeeder.insertAllPrescriptions(db);
-//        AppDatabaseSeeder.insertAllHistory(db);
+        AppDatabaseSeeder.insertAllUsersTask(db);
+        AppDatabaseSeeder.insertAllMedicinesTask(db);
+        AppDatabaseSeeder.insertAllPrescriptions(db);
+        AppDatabaseSeeder.insertAllHistory(db);
 
         // TODO: MEDICINE ARRAY
         //  1) Replace hardcoded array with an API fetch
@@ -62,36 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //A User creates a list with a medicine to take
         MedicinesCard firstCard = new MedicinesCard(firstUserName, db.medicineDao().getAll().get(1));
-
-        // Returns the the medc
-        mAdapter = new MedicineAdapter(db.medicineDao().getAll());
-//        recyclerView.setAdapter(mAdapter);
-
-    }
-
-    public void onClick(View v){
-        String viewId = getResources().getResourceEntryName(v.getId());
-        switch (viewId){
-            case "toMedicineScreen":
-                Log.d("vID", viewId);
-                Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
-                startActivity(toMedicineUserIntent);
-                break;
-            case "medicineTimeline":
-                Log.d("vID-timeline", viewId);
-                break;
-            case "fetchMedicine":
-                Log.d("vID-fetch", viewId);
-                break;
-            default:
-                Log.e("mainActivity.onClick","No matching viewId found.");
-        }
-
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        //
+    public void onClick(View v) {
 
     }
 }

@@ -21,37 +21,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/fetchMedicine"
-        android:layout_width="352dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="16dp"
-        android:background="#B39DDB"
-        android:hapticFeedbackEnabled="true"
-        android:text="@string/button_medicine_fetch"
-        android:typeface="normal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicineTimeline" />
-
-    <Button
-        android:id="@+id/addMedicine"
-        android:layout_width="352dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="4dp"
-        android:background="#B39DDB"
-        android:backgroundTint="#B39DDB"
-        android:backgroundTintMode="add"
-        android:text="@string/button_add_medicine"
-        android:typeface="normal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toMedicineScreen" />
-
-    <Button
         android:id="@+id/toMedicineScreen"
         android:layout_width="352dp"
         android:layout_height="72dp"
@@ -59,30 +28,28 @@
         android:backgroundTint="#651FFF"
         android:gravity="fill_vertical"
         android:hapticFeedbackEnabled="true"
-        android:text="To Medicine Screen"
+        android:text="My medicines"
         android:textAlignment="center"
         android:textAllCaps="true"
         app:iconPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="RtlCompat" />
 
     <Button
-        android:id="@+id/medicineTimeline"
+        android:id="@+id/toMedicineTimeline"
         android:layout_width="352dp"
         android:layout_height="72dp"
         android:layout_marginTop="16dp"
         android:background="#B39DDB"
         android:hapticFeedbackEnabled="true"
-        android:text="@string/button_medicine_timeline"
+        android:text="My timeline"
         android:typeface="normal"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addMedicine" />
+        app:layout_constraintTop_toBottomOf="@+id/toMedicineScreen" />
 
     <TextView
         android:id="@+id/textView"

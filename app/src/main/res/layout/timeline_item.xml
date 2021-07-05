@@ -11,8 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
 
+        android:layout_marginBottom="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,8 +22,8 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/pills_img"
-            android:alpha=".3"/>
+            android:alpha=".3"
+            app:srcCompat="@drawable/pills_img" />
 
         <LinearLayout
             android:id="@+id/medicineCardHolder"

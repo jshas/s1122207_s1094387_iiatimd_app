@@ -1,6 +1,7 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +15,6 @@ public class MedicineUserActivity extends Activity implements AdapterView.OnItem
     private Spinner spinnerMedicineNames;
     private String input;
 
-    Button addButton;
-
     @Override
     public void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
@@ -28,13 +27,19 @@ public class MedicineUserActivity extends Activity implements AdapterView.OnItem
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMedicineNames.setAdapter(adapter);
 
-        addButton = (Button) findViewById(R.id.addMedicineButton);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("test_input", "input is: " + input);                //FIXME: input returns NULL
-            }
-        });
+
+        Button addButton = findViewById(R.id.addMedicineButton);
+        addButton.setOnClickListener((View v) -> {
+                    Intent toMainActivityIntent = new Intent(this, MainActivity.class);
+                    startActivity(toMainActivityIntent);
+                }
+        );
+        Button toMainActivity = findViewById(R.id.toMainActivityButton);
+        toMainActivity.setOnClickListener((View v) -> {
+                    Intent toMainActivityIntent = new Intent(this, MainActivity.class);
+                    startActivity(toMainActivityIntent);
+                }
+        );
     }
 
     @Override
