@@ -22,6 +22,8 @@
         </activity>
         <activity android:name="MedicineUserActivity"/>
         <activity android:name=".TimelineActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <receiver android:name=".AlarmReceiver"/>
     </application>
 
 
