@@ -1,9 +1,7 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 
 
@@ -33,8 +31,9 @@ public class MedicinesCard {
         this.dailyAmount = dailyAmount;
     }
 
-    public ArrayList<Medicine> getMedicines() {
-        return medicines;
+    public Medicine[] getMedicines() {
+        Medicine[] medicineArray = medicines.toArray(new Medicine[0]);
+        return medicineArray;
     }
 
     public void addMedicine(Medicine medicine){

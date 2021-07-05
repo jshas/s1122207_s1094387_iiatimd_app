@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 public class MedicineUserActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
+    private ImageView pills;
     private Spinner spinnerMedicineNames;
     private String input;
 
@@ -19,6 +23,7 @@ public class MedicineUserActivity extends Activity implements AdapterView.OnItem
     public void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
         setContentView(R.layout.medicine_user_activity);
+        pills=(ImageView)findViewById(R.id.imagePills);
 
         spinnerMedicineNames = findViewById(R.id.medicineNames);
 
@@ -41,7 +46,6 @@ public class MedicineUserActivity extends Activity implements AdapterView.OnItem
                 }
         );
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.medicineNames){
