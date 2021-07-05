@@ -20,9 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="MedicineUserActivity"/>
+        <activity android:name=".MedicineUserActivity"/>
         <activity android:name=".TimelineActivity"/>
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".RegisterActivity"/>
         <receiver android:name=".AlarmReceiver"/>
     </application>
 
