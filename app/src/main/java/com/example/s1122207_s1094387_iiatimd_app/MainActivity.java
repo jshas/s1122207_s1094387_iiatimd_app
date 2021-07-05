@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Main buttons with single onClickListener
        Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
         toMedicineUserButton.setOnClickListener(this);
-       Button buttonMedicineAdd = findViewById(R.id.addMedicine);
-        buttonMedicineAdd.setOnClickListener(this);
        Button buttonMedicineTimeline = findViewById(R.id.medicineTimeline);
         buttonMedicineTimeline.setOnClickListener(this);
        Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
@@ -65,11 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //A User creates a list with a medicine to take
         MedicinesCard firstCard = new MedicinesCard(firstUserName, db.medicineDao().getAll().get(1));
 
-
-        //Makes a recyclerview "timeline" with al the timelineItems
-
-        //mAdapter = new HistoryAdapter(timeline);
-
         // Returns the the medc
         mAdapter = new MedicineAdapter(db.medicineDao().getAll());
 //        recyclerView.setAdapter(mAdapter);
@@ -81,12 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (viewId){
             case "toMedicineScreen":
                 Log.d("vID", viewId);
-                Log.d("Scherm2", "Test scherm2");
                 Intent toMedicineUserIntent = new Intent(this, MedicineUserActivity.class);
                 startActivity(toMedicineUserIntent);
-                break;
-            case "addMedicine":
-                Log.d("vID-add", viewId);
                 break;
             case "medicineTimeline":
                 Log.d("vID-timeline", viewId);
@@ -99,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
