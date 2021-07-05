@@ -13,7 +13,7 @@ import java.util.List;
 
 @Dao
 public interface HistoryDao {
-    @Query("Select * FROM history;")
+    @Query("Select * FROM history")
     List<History> getAll();
 
     @Transaction
@@ -31,4 +31,7 @@ public interface HistoryDao {
 
     @Delete
     void delete(History history);
+
+    @Query("DELETE FROM history")
+    void deleteAll();
 }

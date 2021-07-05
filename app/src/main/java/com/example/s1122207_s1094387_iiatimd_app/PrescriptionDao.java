@@ -27,4 +27,7 @@ public interface PrescriptionDao {
   @Delete
   void delete(Prescription prescription);
 
+  @Query("DELETE FROM prescription;")
+  void deleteAll();
+
 }

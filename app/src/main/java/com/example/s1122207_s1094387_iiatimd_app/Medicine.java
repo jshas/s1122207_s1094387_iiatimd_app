@@ -66,9 +66,7 @@ public class Medicine {
 
     public static Medicine[] fromJson(JSONArray jsonArray) throws JsonParseException {
         Gson gson = new Gson();
-
         Medicine[] medicines = gson.fromJson(jsonArray.toString(), Medicine[].class);
-
         for (Medicine medicine : medicines) {
             Log.d("TestJSONformatter", (String) medicine.getName());
         }

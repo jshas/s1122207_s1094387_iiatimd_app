@@ -15,8 +15,14 @@ public interface MedicineDao {
     @Query("SELECT * FROM medicine")
     List<Medicine> getAll();
 
+    @Transaction
+    @Query("SELECT * FROM medicine WHERE medicineId LIKE :id")
+    List<Medicine> getAll(long id);
+
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAllMedicines(Medicine... medicine);
+    void insertAllMedicines(Medicine[] medicine);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMedicine(Medicine medicine);
