@@ -1,6 +1,6 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
-// DEZE CLASS IS NIET MEER NODIG //
+// FIXME: DEZE CLASS IS NIET MEER NODIG //
 
 import android.os.Bundle;
 import android.util.Log;

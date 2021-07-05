@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter mAdapter;
@@ -22,45 +22,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button toMedicineUserButton = findViewById(R.id.toMedicineUserScreen);
+        // Main buttons with single onClickListener
+       Button toMedicineUserButton = findViewById(R.id.toMedicineScreen);
         toMedicineUserButton.setOnClickListener(this);
+       Button buttonMedicineAdd = findViewById(R.id.addMedicine);
+        buttonMedicineAdd.setOnClickListener(this);
+       Button buttonMedicineTimeline = findViewById(R.id.medicineTimeline);
+        buttonMedicineTimeline.setOnClickListener(this);
+       Button buttonAPIFetch = findViewById(R.id.fetchMedicine);
+        buttonAPIFetch.setOnClickListener(this);
 
         // nameDisplay
         TextView nameDisplay = findViewById(R.id.textView);
         //Recyclerview setup
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.navigationRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize();
 
-
-        //FIXME:
-        // Replace .allowMainThreadQueries() with seperate Task Classes in project
+        // SINGLETONS // //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
+        VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
         AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
-        //TODO:
-        // MEDICINE ARRAY
-        // 1) Replace database seeding with an API FETCH
-        AppDatabaseSeeder.insertAllUsersTask(db);
-        AppDatabaseSeeder.insertAllMedicinesTask(db);
-        AppDatabaseSeeder.insertAllPrescriptions(db);
-        AppDatabaseSeeder.insertAllHistory(db);
 
+        // TODO: Remove seeded data and seeders in production version
+//        AppDatabaseSeeder.insertAllUsersTask(db);
+//        AppDatabaseSeeder.insertAllMedicinesTask(db);
+//        AppDatabaseSeeder.insertAllPrescriptions(db);
+//        AppDatabaseSeeder.insertAllHistory(db);
+
+        // TODO: MEDICINE ARRAY
+        //  1) Replace hardcoded array with an API fetch
 
         //TODO: replace hardcode user with login
-        //A User is created
-        User person = new User(1, "Sjon Haan", "sjonnie@testkip.nl");
-
-        //TODO: replace hardcore history with data from API
-        //A User creates a list with a medicine to take
-        MedicinesCard firstCard = new MedicinesCard("Sjon Haan", db.medicineDao().getAll().get(1));
-
-
-        //FIXME: Replace .allowMainThreadQueries() with seperate Task Classes in project
-        db.medicineDao().insertAllMedicines();
-        db.userDao().insertUser(person);
-
-
         // Gets @string/welcome_text = welcome (var) And adds the User's name at (var).
         String text;
 //        String firstUserName = db.userDao().getById(0).getName();
