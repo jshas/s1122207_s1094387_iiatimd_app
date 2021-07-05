@@ -2,7 +2,6 @@ package com.example.s1122207_s1094387_iiatimd_app;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.DatabaseView;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;

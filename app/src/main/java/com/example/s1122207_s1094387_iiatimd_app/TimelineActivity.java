@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.room.RoomDatabase;
-import androidx.room.Room;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +16,6 @@ public class TimelineActivity extends Activity implements View.OnClickListener{
     VolleySingleton vs = VolleySingleton.getInstance(getApplicationContext());
     AppDatabase db = AppDatabase.getInstance(getApplicationContext());
 
-    private ImageView pills;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter recyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -33,8 +29,6 @@ public class TimelineActivity extends Activity implements View.OnClickListener{
     public void onCreate(Bundle savedInstances) {
         super.onCreate(savedInstances);
         setContentView(R.layout.timeline_activity);
-        pills=(ImageView)findViewById(R.id.imagePills);
-
 
         recyclerView = findViewById(R.id.historyRecyclerView);
 

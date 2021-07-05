@@ -1,7 +1,6 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;

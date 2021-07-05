@@ -1,8 +1,7 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
-import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 
 public class TimelineItem {

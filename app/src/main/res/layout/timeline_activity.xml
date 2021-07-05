@@ -5,14 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imagePills"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationTop"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:background="@color/cardview_dark_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <Button
             android:id="@+id/toMainActivityButton"
             android:layout_width="60dp"
@@ -24,17 +35,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/imagePills"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:alpha="0.3"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/pills" />
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/HistoryRecyclerView"
+        android:id="@+id/historyRecyclerView"
         android:layout_width="372dp"
         android:layout_height="529dp"
         app:layout_constraintBottom_toTopOf="@+id/fetchMedicine"
@@ -58,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HistoryRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/historyRecyclerView"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

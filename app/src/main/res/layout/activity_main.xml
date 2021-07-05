@@ -10,16 +10,6 @@
     android:fitsSystemWindows="false"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/navigationRecyclerView"
-        android:layout_width="410dp"
-        android:layout_height="152dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomAppBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/toMedicineScreen"
         android:layout_width="352dp"
@@ -34,7 +24,7 @@
         app:iconPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         tools:ignore="RtlCompat" />
 
     <Button
@@ -52,11 +42,12 @@
         app:layout_constraintTop_toBottomOf="@+id/toMedicineScreen" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nameTextView"
         android:layout_width="0dp"
-        android:layout_height="112dp"
+        android:layout_height="80dp"
         android:backgroundTint="#B388FF"
         android:backgroundTintMode="add"
+        android:background="@color/cardview_dark_background"
         android:fontFamily="sans-serif"
         android:gravity="center_vertical"
         android:includeFontPadding="true"
@@ -91,5 +82,18 @@
             app:layout_anchor="@+id/bottomAppBar2"
             app:layout_anchorGravity="center" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ImageView
+        android:id="@+id/imagePills"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/background"
+        android:contentDescription="@string/background_img_description"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

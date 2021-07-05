@@ -23,7 +23,7 @@ public class OverviewMain extends AppCompatActivity {
         Bundle myBundle = getIntent().getExtras();
         Log.d("bundle test",myBundle.getString("name"));
 
-        recyclerView = findViewById(R.id.HistoryRecyclerView);
+        recyclerView = findViewById(R.id.historyRecyclerView);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.hasFixedSize(); //Tenzij de lijst dat niet heeft

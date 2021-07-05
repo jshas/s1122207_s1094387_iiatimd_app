@@ -1,8 +1,5 @@
 package com.example.s1122207_s1094387_iiatimd_app;
 
-import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
-
 import java.util.Date;
 
 public class AppDatabaseSeeder {

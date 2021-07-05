@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-
 public class MedicineUserActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
     private ImageView pills;
